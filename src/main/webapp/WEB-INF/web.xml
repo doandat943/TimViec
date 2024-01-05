@@ -49,4 +49,24 @@
     <servlet-name>UpdateAccountServlet</servlet-name>
     <url-pattern>/UpdateAccountServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CookieDeletionServlet</display-name>
+    <servlet-name>CookieDeletionServlet</servlet-name>
+    <servlet-class>controller.CookieDeletionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CookieDeletionServlet</servlet-name>
+    <url-pattern>/CookieDeletionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchAccountServlet</display-name>
+    <servlet-name>SearchAccountServlet</servlet-name>
+    <servlet-class>controller.SearchAccountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchAccountServlet</servlet-name>
+    <url-pattern>/SearchAccountServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

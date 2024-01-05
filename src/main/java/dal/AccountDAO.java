@@ -26,7 +26,7 @@ public class AccountDAO extends DBContext {
 		return list;
 	}
 
-	public Account getAccountById(String email) {
+	public Account getAccountByEmail(String email) {
 		String sql = "select * from account " 
 					+ "where email = ?";
 
@@ -43,6 +43,45 @@ public class AccountDAO extends DBContext {
 		}
 		return null;
 	}
+	
+	public List<Account> getAccountsByType(String accountType) {
+        List<Account> accountList = new ArrayList<>();
+        String sql = "SELECT * FROM account WHERE role = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, accountType);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Account account = new Account(rs.getString("email"), rs.getString("password"), rs.getString("role"));
+                    accountList.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return accountList;
+    }
+	
+	public List<Account> findAccountsByEmail(String partialEmail) {
+	    List<Account> accountList = new ArrayList<>();
+	    String sql = "SELECT * FROM account WHERE email LIKE ?";
+
+	    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+	        ps.setString(1, "%" + partialEmail + "%");
+
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                Account account = new Account(rs.getString("email"), rs.getString("password"), rs.getString("role"));
+	                accountList.add(account);
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return accountList;
+	}
+
 
 	public Account check(String email, String password) {
 		String sql = "SELECT role " + "FROM account " + "WHERE email=? AND password=?";

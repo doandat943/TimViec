@@ -30,7 +30,7 @@ public class UpdateAccountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AccountDAO cd = new AccountDAO();
 		String email = request.getParameter("email");
-		Account c = cd.getAccountById(email);
+		Account c = cd.getAccountByEmail(email);
 		request.setAttribute("account", c);
 		request.getRequestDispatcher("change-password.jsp").forward(request, response);
 	}

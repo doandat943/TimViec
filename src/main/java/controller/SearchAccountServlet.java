@@ -13,15 +13,15 @@ import java.util.List;
 import dal.AccountDAO;
 
 /**
- * Servlet implementation class aAccountServlet
+ * Servlet implementation class SearchAccountServlet
  */
-public class ManageAccountServlet extends HttpServlet {
+public class SearchAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManageAccountServlet() {
+    public SearchAccountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +30,26 @@ public class ManageAccountServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String partialEmail = request.getParameter("partialEmail");
+		String accountType = request.getParameter("accountType");
 		AccountDAO cd = new AccountDAO();
-		List<Account> list = cd.getList();
+		List<Account> list;
+		if (partialEmail != null) {
+			list = cd.findAccountsByEmail(partialEmail);
+		} else {
+			list = cd.getAccountsByType(accountType);
+			if ("Admin".equals(accountType)) {
+		        accountType = "Quản trị viên";
+		    } else if ("Employer".equals(accountType)) {
+		        accountType = "Nhà tuyển dụng";
+		    } else if ("User".equals(accountType)) {
+		        accountType = "Người dùng";
+		    }
+		}
 		request.setAttribute("data", list);
-		request.setAttribute("role", "Tất cả");
-		request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
-	}
+		request.setAttribute("role", accountType);
+		request.getRequestDispatcher("/manageAccount.jsp").forward(request, response);
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
