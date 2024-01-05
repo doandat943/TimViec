@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TimViec - Đổi mật khẩu</title>
+    <title>SB Admin 2 - Forgot Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -71,6 +71,13 @@
                                             
                                         </input>
                                     </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="register.jsp">Create an Account!</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="login.jsp">Already have an account? Login!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
