@@ -1,7 +1,6 @@
 package controller;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,7 +44,6 @@ public class UpdateAccountServlet extends HttpServlet {
 		String role = request.getParameter("role");
 		Account c = new Account(email, password, role); 
 		cd.update(c);
-		response.sendRedirect("aAccountServlet");
+		response.sendRedirect("ManageAccountServlet");
 	}
-
 }

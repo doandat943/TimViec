@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ include file="/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Animation Utilities</title>
+<title>TimViec - Quản lý tài khoản</title>
 <script type="text/javascript">
 	function doDelete(email) {
 		if (confirm("Bạn có chắc muốn xóa tài khoản với email: " + email
