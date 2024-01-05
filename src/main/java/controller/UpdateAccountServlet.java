@@ -45,7 +45,7 @@ public class UpdateAccountServlet extends HttpServlet {
 		String role = request.getParameter("role");
 		Account c = new Account(email, password, role); 
 		cd.update(c);
-		response.sendRedirect("aAccountServlet");
+		response.sendRedirect("ManageAccountServlet");
 	}
 
 }
