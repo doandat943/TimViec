@@ -16,7 +16,7 @@
 <title>SB Admin 2 - Animation Utilities</title>
 <script type="text/javascript">
 	function doDelete(email) {
-		if(confirm("Bạn có chắc muốn xóa tài khoản với email: = " + email + " không?")) {
+		if(confirm("Bạn có chắc muốn xóa tài khoản với email: " + email + " không?")) {
 			window.location = "DeleteAccountServlet?email=" + email;
 		}
 	}
