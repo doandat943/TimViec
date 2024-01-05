@@ -9,7 +9,7 @@ public class DBContext {
 	public DBContext() {
 		String name = "root";
 		String pass = "kinhvanhoa0";
-		String url = "jdbc:mariadb://cloud.joverse.me:3001/occupationdb";
+		String url = "jdbc:mariadb://cloud.joverse.me:3001/TimViec";
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			connection = DriverManager.getConnection(url, name, pass);

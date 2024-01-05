@@ -47,7 +47,7 @@ public class SearchAccountServlet extends HttpServlet {
 		}
 		request.setAttribute("data", list);
 		request.setAttribute("role", accountType);
-		request.getRequestDispatcher("/manageAccount.jsp").forward(request, response);
+		request.getRequestDispatcher("/manage-account.jsp").forward(request, response);
     }
 
 	/**

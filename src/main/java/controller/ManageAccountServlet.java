@@ -33,7 +33,7 @@ public class ManageAccountServlet extends HttpServlet {
 		List<Account> list = cd.getList();
 		request.setAttribute("data", list);
 		request.setAttribute("role", "Tất cả");
-		request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
+		request.getRequestDispatcher("manage-account.jsp").forward(request, response);
 	}
 
 	/**
