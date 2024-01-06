@@ -1,7 +1,6 @@
 package model;
 
 public class Employer {
-	private int emp_id;
 	private String contact_name;
 	private String employer_name;
 	private String phone;
@@ -14,10 +13,9 @@ public class Employer {
 		super();
 	}
 
-	public Employer(int emp_id, String contact_name, String employer_name, String phone, String address, String image,
+	public Employer(String contact_name, String employer_name, String phone, String address, String image,
 			String city, String email) {
 		super();
-		this.emp_id = emp_id;
 		this.contact_name = contact_name;
 		this.employer_name = employer_name;
 		this.phone = phone;
@@ -25,14 +23,6 @@ public class Employer {
 		this.image = image;
 		this.city = city;
 		this.email = email;
-	}
-
-	public int getEmp_id() {
-		return emp_id;
-	}
-
-	public void setEmp_id(int emp_id) {
-		this.emp_id = emp_id;
 	}
 
 	public String getContact_name() {

@@ -33,32 +33,39 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String rememberPassword = request.getParameter("rememberPassword");
+
+		AccountDAO d = new AccountDAO();
+		String role = d.check(email, password);
 		
 		Cookie cu = new Cookie("email", email);
 		Cookie cp = new Cookie("password", password);
+		Cookie cro = new Cookie("role", role);
 		Cookie cr = new Cookie("rememberPassword", rememberPassword);
 		if (rememberPassword != null) {
 			cu.setMaxAge(7 * 60 * 60 * 24);
 			cp.setMaxAge(7 * 60 * 60 * 24);
+			cro.setMaxAge(7 * 60 * 60 * 24);
 			cr.setMaxAge(7 * 60 * 60 * 24);
 		} else {
 			cu.setMaxAge(0);
 			cp.setMaxAge(0);
+			cro.setMaxAge(0);
 			cr.setMaxAge(0);
 		}
 
 		response.addCookie(cu);
 		response.addCookie(cp);
+		response.addCookie(cro);
 		response.addCookie(cr);
-		AccountDAO d = new AccountDAO();
-		Account a = d.check(email, password);
-		if (a == null) {
+		if (role == null) {
 			request.setAttribute("error", "Email or password invalid!!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
-		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("account", a);
+		} else if (role.equals("Admin")){
 			response.sendRedirect("ManageAccountServlet");
+		} else if (role.equals("Employer")){
+			response.sendRedirect("EmployerServlet");
+		} else if (role.equals("User")){
+			response.sendRedirect("JobListServlet");
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

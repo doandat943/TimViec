@@ -29,7 +29,7 @@ public class DeleteAccountServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		AccountDAO cd = new AccountDAO();
 		cd.delete(email);
-		response.sendRedirect("ManageAccountServlet");
+		response.sendRedirect("ManageJobServlet");
 	}
 
 	/**

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>TimViec - Quản lý tài khoản</title>
+<title>FastJob - Quản lý tài khoản</title>
 <script type="text/javascript">
 	function doDelete(email) {
 		if (confirm("Bạn có chắc muốn xóa tài khoản với email: " + email
@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
 					<i class="fas fa-suitcase"></i>
 				</div>
 				<div class="sidebar-brand-text mx-3">
-					TimViec <sup>2024</sup>
+					FastJob <sup>2024</sup>
 				</div>
 			</a>
 
@@ -70,9 +70,9 @@ pageEncoding="UTF-8"%>
 				<div id="collapseTwo" class="collapse show"
 					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item active" href="ManageProfile">Tài khoản</a>
-						<a class="collapse-item" href="ManageCompany">Nhà tuyển dụng</a> <a
-							class="collapse-item" href="ManageCompany">Người dùng</a>
+						<a class="collapse-item active" href="ManageAccountServlet">Tài khoản</a>
+						<a class="collapse-item" href="ManageEmployerServlet">Nhà tuyển dụng</a> <a
+							class="collapse-item" href="ManageUserServlet">Người dùng</a>
 					</div>
 				</div></li>
 
@@ -80,12 +80,12 @@ pageEncoding="UTF-8"%>
 			<li class="nav-item active"><a class="nav-link" href="#"
 				data-toggle="collapse" data-target="#collapseTwo"
 				aria-expanded="true" aria-controls="collapseTwo"> <i
-					class="fas fa-fw fa-cog"></i> <span>Quản lý người dùng</span>
+					class="fas fa-fw fa-cog"></i> <span>Quản lý hồ sơ</span>
 			</a>
 				<div id="collapseTwo" class="collapse show"
 					aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="ManageProfile">Tin ứng tuyển</a> <a
+						<a class="collapse-item" href="ManageJobServlet">Tin ứng tuyển</a> <a
 							class="collapse-item" href="ManageCompany">Hồ sơ ứng tuyển</a>
 					</div>
 				</div></li>
@@ -140,10 +140,13 @@ pageEncoding="UTF-8"%>
 										id="dropdownMenuButton" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">${role}</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="ManageAccountServlet">Tất cả</a> <a
-											class="dropdown-item" href="SearchAccountServlet?accountType=Admin">Admin</a> <a
-											class="dropdown-item" href="SearchAccountServlet?accountType=Employer">Nhà tuyển dụng</a> <a
-											class="dropdown-item" href="SearchAccountServlet?accountType=User">Người dùng</a>
+										<a class="dropdown-item" href="ManageAccountServlet">Tất
+											cả</a> <a class="dropdown-item"
+											href="SearchAccountServlet?accountType=Admin">Admin</a> <a
+											class="dropdown-item"
+											href="SearchAccountServlet?accountType=Employer">Nhà
+											tuyển dụng</a> <a class="dropdown-item"
+											href="SearchAccountServlet?accountType=User">Người dùng</a>
 									</div>
 								</div>
 							</div>
@@ -197,20 +200,15 @@ pageEncoding="UTF-8"%>
 											<th>Quản lý</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>Email</th>
-											<th>Mật khẩu</th>
-											<th>Chức vụ</th>
-											<th>Quản lý</th>
-										</tr>
-									</tfoot>
 									<tbody>
 										<c:forEach items="${data}" var="d">
 											<tr>
 												<td>${d.email}</td>
 												<td>***********</td>
-												<td>${d.role}</td>
+												<td><c:if test="${d.role eq 'User'}">Người dùng
+    											</c:if> <c:if test="${d.role eq 'Employer'}">Nhà tuyển dụng
+    											</c:if> <c:if test="${d.role eq 'Admin'}">Quản trị viên
+    											</c:if></td>
 												<td><a href="UpdateAccountServlet?${d.email}">Đổi
 														mật khẩu</a> <a href="#" onClick="doDelete('${d.email}')">Xóa</a></td>
 											</tr>

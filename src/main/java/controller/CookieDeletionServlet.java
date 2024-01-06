@@ -35,7 +35,7 @@ public class CookieDeletionServlet extends HttpServlet {
             }
         }
 
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("HomeServlet");
 	}
 
 	/**

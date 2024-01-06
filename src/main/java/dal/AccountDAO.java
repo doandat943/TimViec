@@ -21,7 +21,7 @@ public class AccountDAO extends DBContext {
 			}
 			ps.close();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return list;
 	}
@@ -39,7 +39,7 @@ public class AccountDAO extends DBContext {
 				return c;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -83,7 +83,7 @@ public class AccountDAO extends DBContext {
 	}
 
 
-	public Account check(String email, String password) {
+	public String check(String email, String password) {
 		String sql = "SELECT role " + "FROM account " + "WHERE email=? AND password=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -91,12 +91,10 @@ public class AccountDAO extends DBContext {
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				String role = rs.getString(1);
-				Account a = new Account(email, password, role);
-				return a;
+				return rs.getString(1);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -110,7 +108,7 @@ public class AccountDAO extends DBContext {
 			ps.setString(3, c.getRole());
 			ps.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -124,7 +122,7 @@ public class AccountDAO extends DBContext {
 			ps.setString(4, c.getEmail());
 			ps.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -135,7 +133,7 @@ public class AccountDAO extends DBContext {
 			ps.setString(1, email);
 			ps.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 }
