@@ -11,6 +11,8 @@ import model.Account;
 import model.User;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import dal.AccountDAO;
 import dal.UserDAO;
@@ -50,7 +52,8 @@ public class RegisterUserServlet extends HttpServlet {
 				error = "Mật khẩu không khớp!!!";
 			}
 			else {
-				Account b = new Account(email, password, "User");
+				String encodePassword = sha1Hash(password);
+				Account b = new Account(email, encodePassword, "User");
 				d.insert(b);
 
 				UserDAO ad = new UserDAO();
@@ -65,6 +68,30 @@ public class RegisterUserServlet extends HttpServlet {
 		request.setAttribute("error", error);
 		request.getRequestDispatcher("register-user.jsp").forward(request, response);
 	}
+	
+	public static String sha1Hash(String input) {
+        try {
+            // Tạo một đối tượng MessageDigest với thuật toán SHA-1
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+
+            // Chuyển đổi chuỗi đầu vào thành mảng byte và cập nhật MessageDigest
+            md.update(input.getBytes());
+
+            // Lấy giá trị băm (hash) từ MessageDigest
+            byte[] digest = md.digest();
+
+            // Chuyển đổi mảng byte thành chuỗi hex
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digest) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

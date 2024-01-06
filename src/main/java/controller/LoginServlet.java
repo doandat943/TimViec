@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 import model.Account;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import dal.AccountDAO;
 
@@ -34,9 +36,12 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String rememberPassword = request.getParameter("rememberPassword");
 
-		AccountDAO d = new AccountDAO();
-		String role = d.check(email, password);
+		String encodePassword = sha1Hash(password);
 		
+		System.out.println(encodePassword);
+		AccountDAO d = new AccountDAO();
+		String role = d.check(email, encodePassword);
+
 		Cookie cu = new Cookie("email", email);
 		Cookie cp = new Cookie("password", password);
 		Cookie cro = new Cookie("role", role);
@@ -58,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 		response.addCookie(cro);
 		response.addCookie(cr);
 		if (role == null) {
-			request.setAttribute("error", "Email or password invalid!!");
+			request.setAttribute("error", "Tài khoản hoặc mật khẩu sai!!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else if (role.equals("Admin")){
 			response.sendRedirect("ManageAccountServlet");
@@ -69,6 +74,30 @@ public class LoginServlet extends HttpServlet {
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+	
+	public static String sha1Hash(String input) {
+        try {
+            // Tạo một đối tượng MessageDigest với thuật toán SHA-1
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+
+            // Chuyển đổi chuỗi đầu vào thành mảng byte và cập nhật MessageDigest
+            md.update(input.getBytes());
+
+            // Lấy giá trị băm (hash) từ MessageDigest
+            byte[] digest = md.digest();
+
+            // Chuyển đổi mảng byte thành chuỗi hex
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digest) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

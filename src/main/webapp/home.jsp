@@ -65,7 +65,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto my-2 my-lg-0 tnav-right tn-nav">
 						<li class="nav-item"><a class="nav-link"
-							href="register-user.jsp">Đăng Ký Người Dùng</a></li>
+							href=">CÔNG CỤ QUẢN TRỊ<">Đăng Ký Người Dùng</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="register-employer.jsp">Đăng Ký Nhà tuyển dụng</a></li>
 						<li class="nav-item dropdown"><a
